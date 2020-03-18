@@ -1,0 +1,17 @@
+.game-board {
+  position: absolute;
+  left: 25%;
+  top: 15%;
+  border:5px solid #000000;
+}
+
+.right-column {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+}
+
+button{
+  color: green;
+  border-style: solid;
+}

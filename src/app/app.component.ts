@@ -1,3 +1,4 @@
+import { GridComponent } from './components/game-parts/grid/grid.component';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-crash-todolist';
+  name: string = 'Bram';
 }
