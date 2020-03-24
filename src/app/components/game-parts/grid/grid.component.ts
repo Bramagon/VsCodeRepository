@@ -19,7 +19,7 @@ export class GridComponent implements OnInit {
   points: number;
   lines: number;
   level: number;
-  service: TetrisService;
+  service: TetrisService = new TetrisService();
     moves = {
       [KEY.LEFT]: (p: IPiece): IPiece => ({...p, x: p.x - 1}),
       [KEY.RIGHT]: (p: IPiece): IPiece => ({ ...p, x: p.x + 1 }),

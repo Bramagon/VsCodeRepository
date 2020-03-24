@@ -5,7 +5,6 @@ import { COLS } from '../constants';
 
 export class TetrisService {
 
-
   constructor() { }
 
 isEmpty(val: number) {
@@ -13,11 +12,11 @@ isEmpty(val: number) {
 }
 
 insideWalls(x: number) {
-  if (x < COLS && x > 0) { return true; } else { return false; }
+  if (x < COLS && x >= 0) { return true; } else { return false; }
 }
 
 aboveFloor(y: number) {
-  if (y < ROWS && y > 0) { return true; } else { return false; }
+  if (y < ROWS && y >= 0) { return true; } else { return false; }
 }
 
 valid(p: IPiece): boolean {
