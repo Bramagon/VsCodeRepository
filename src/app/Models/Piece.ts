@@ -1,4 +1,4 @@
-import { BLOCK_SIZE } from '../constants';
+import { BLOCK_SIZE, SHAPES, COLORS } from '../constants';
 
 export interface IPiece {
   x: number;
@@ -13,13 +13,13 @@ export class Piece implements IPiece {
   color: string;
   shape: number[][];
 
-  constructor(private ctx: CanvasRenderingContext2D) {
-    this.spawn();
+  constructor(private ctx: CanvasRenderingContext2D, typeId: number) {
+    this.spawn(typeId);
   }
 
-  spawn() {
-    this.color = 'blue';
-    this.shape = [[2, 0, 0], [2, 2, 2], [0, 0, 0]];
+  spawn(typeId: number) {
+    this.color = COLORS[typeId];
+    this.shape = SHAPES[typeId];
 
     this.x = 3;
     this.y = 0;

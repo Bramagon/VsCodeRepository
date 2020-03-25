@@ -20,25 +20,36 @@ aboveFloor(y: number) {
 }
 
 valid(p: IPiece): boolean {
-  return p.shape.every((row, dy) => {
-    return row.every((value, dx) => {
-      let x = p.x + dx;
-      let y = p.y + dy;
-      return (
-        this.isEmpty(value) ||
-       (this.insideWalls(x) &&
-        this.aboveFloor(y)
-      ));
-   });
-});
-
-
-
-
+    return p.shape.every((row, dy) => {
+      return row.every((value, dx) => {
+        let x = p.x + dx;
+        let y = p.y + dy;
+        return (
+          this.isEmpty(value) ||
+        (this.insideWalls(x) &&
+          this.aboveFloor(y)
+        ));
+    });
+  });
 }
 
+rotate(p: IPiece): IPiece {
+  let clone: IPiece = JSON.parse(JSON.stringify(p));
+  
+  for(let y = 0; y < p.shape.length; y++) {
+    for (let x = 0; x < y; x++) {
+      [p.shape[x][y], p.shape[y][x]] = 
+      [p.shape[y][x], p.shape[x][y]];
+    }
+  }
 
+  p.shape.forEach(row => row.reverse());
 
+  return clone;
+}
 
+randomizeTetromino(amountOfTypes: number): number {
+  return Math.floor(Math.random() * amountOfTypes);
+}
 
 }

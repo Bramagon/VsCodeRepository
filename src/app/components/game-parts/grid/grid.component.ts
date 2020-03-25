@@ -1,7 +1,7 @@
 import { TetrisService } from './../../../services/TetrisService';
 import { IPiece } from './../../../Models/Piece';
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
-import { COLS, BLOCK_SIZE, ROWS, KEY } from './../../../constants';
+import { COLS, BLOCK_SIZE, ROWS, KEY, COLORS, SHAPES } from './../../../constants';
 import { Piece } from 'src/app/Models/Piece';
 
 
@@ -20,12 +20,12 @@ export class GridComponent implements OnInit {
   lines: number;
   level: number;
   service: TetrisService = new TetrisService();
-    moves = {
-      [KEY.LEFT]: (p: IPiece): IPiece => ({...p, x: p.x - 1}),
-      [KEY.RIGHT]: (p: IPiece): IPiece => ({ ...p, x: p.x + 1 }),
-      [KEY.UP]: (p: IPiece): IPiece => ({ ...p, y: p.y - 1 }),
-      [KEY.DOWN]: (p: IPiece): IPiece => ({ ...p, y: p.y + 1 })
-    };
+  moves = {
+    [KEY.LEFT]: (p: IPiece): IPiece => ({...p, x: p.x - 1}),
+    [KEY.RIGHT]: (p: IPiece): IPiece => ({ ...p, x: p.x + 1 }),
+    [KEY.UP]: (p: IPiece): IPiece => this.service.rotate(p),
+    [KEY.SPACE]: (p: IPiece): IPiece => ({ ...p, y: p.y + 1 })
+  };
 
   ngOnInit(): void {
     this.initGrid();
@@ -44,7 +44,10 @@ export class GridComponent implements OnInit {
 
   play() {
     this.grid = this.getEmptyBoard();
-    this.piece = new Piece(this.ctx);
+    const typeId = this.service.randomizeTetromino(SHAPES.length)
+
+
+    this.piece = new Piece(this.ctx, typeId);
     this.piece.draw();
     console.table(this.grid);
 
@@ -63,6 +66,4 @@ export class GridComponent implements OnInit {
       console.log(this.piece.x, this.piece.y);
     }
   }
-
-
 }
