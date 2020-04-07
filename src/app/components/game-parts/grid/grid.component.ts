@@ -20,6 +20,7 @@ export class GridComponent implements OnInit {
   lines: number;
   level: number;
   service: TetrisService = new TetrisService();
+  time = { start: 0, elapsed: 0, level: 1000 };
   moves = {
     [KEY.LEFT]: (p: IPiece): IPiece => ({...p, x: p.x - 1}),
     [KEY.RIGHT]: (p: IPiece): IPiece => ({ ...p, x: p.x + 1 }),
@@ -29,6 +30,55 @@ export class GridComponent implements OnInit {
 
   ngOnInit(): void {
     this.initGrid();
+  }
+
+  animate(now = 0) {
+    this.time.elapsed = now - this.time.start;
+    if (this.time.elapsed > this.time.level) {
+      this.time.start = now;
+      this.drop();
+    }
+
+    this.draw();
+    requestAnimationFrame(this.animate.bind(this));
+  }
+
+  draw(){
+    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.piece.draw();
+    this.drawBoard();
+  }
+
+  drawBoard() {
+    this.grid.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value > 0) {
+          this.ctx.fillStyle = COLORS[value];
+          this.ctx.fillRect(x, y, 1, 1);
+        }
+      });
+    });
+  }
+
+  drop() {
+    const p = this.moves[KEY.SPACE](this.piece);
+      if (this.service.valid(p, this.grid)) {
+        this.piece.move(p);
+      }
+      else this.freeze();
+  }
+
+  freeze() {
+    this.piece.shape.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value > 0) {
+          this.grid[y + this.piece.y][x + this.piece.x] = value;
+        }
+      });
+    });
+    console.table(this.grid);
+    console.clear();
+    this.spawnPiece();
   }
 
   initGrid() {
@@ -41,14 +91,15 @@ export class GridComponent implements OnInit {
   getEmptyBoard(): number[][] {
     return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
   }
+  spawnPiece(){
+    const typeId = this.service.randomizeTetromino(SHAPES.length)
+    this.piece = new Piece(this.ctx, typeId);
+  }
 
   play() {
     this.grid = this.getEmptyBoard();
-    const typeId = this.service.randomizeTetromino(SHAPES.length)
-
-
-    this.piece = new Piece(this.ctx, typeId);
-    this.piece.draw();
+    this.spawnPiece();
+    this.animate();
     console.table(this.grid);
 
   }
@@ -58,11 +109,11 @@ export class GridComponent implements OnInit {
     if (this.moves[event.keyCode]) {
       event.preventDefault();
       const p = this.moves[event.keyCode](this.piece);
-      if (this.service.valid(p)) {
+      if (this.service.valid(p, this.grid)) {
         this.piece.move(p);
       }
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-      this.piece.draw();
+      this.animate();
       console.log(this.piece.x, this.piece.y);
     }
   }

@@ -1,6 +1,7 @@
 import { ROWS } from './../constants';
 import { Piece, IPiece } from 'src/app/Models/Piece';
 import { COLS } from '../constants';
+import { GridComponent } from '../components/game-parts/grid/grid.component';
 
 
 export class TetrisService {
@@ -19,7 +20,7 @@ aboveFloor(y: number) {
   if (y < ROWS && y >= 0) { return true; } else { return false; }
 }
 
-valid(p: IPiece): boolean {
+valid(p: IPiece, board: number[][]): boolean {
     return p.shape.every((row, dy) => {
       return row.every((value, dx) => {
         let x = p.x + dx;
@@ -27,7 +28,7 @@ valid(p: IPiece): boolean {
         return (
           this.isEmpty(value) ||
         (this.insideWalls(x) &&
-          this.aboveFloor(y)
+          this.aboveFloor(y) //&& board[p.y + y][p.x + x] === 0
         ));
     });
   });

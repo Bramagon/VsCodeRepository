@@ -40,4 +40,5 @@ export class Piece implements IPiece {
     this.x = p.x;
     this.y = p.y;
   }
+
 }
