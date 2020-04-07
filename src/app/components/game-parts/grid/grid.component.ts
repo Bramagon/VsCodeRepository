@@ -53,7 +53,7 @@ export class GridComponent implements OnInit {
     this.grid.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value > 0) {
-          this.ctx.fillStyle = COLORS[value];
+          this.ctx.fillStyle = COLORS[value-1];
           this.ctx.fillRect(x, y, 1, 1);
         }
       });
@@ -76,8 +76,7 @@ export class GridComponent implements OnInit {
         }
       });
     });
-    console.table(this.grid);
-    console.clear();
+    this.clearlines();
     this.spawnPiece();
   }
 
@@ -103,6 +102,14 @@ export class GridComponent implements OnInit {
     console.table(this.grid);
 
   }
+  clearlines(){
+  this.grid.forEach((row, y) => {
+      if (row.every(value => value > 0)) {
+        this.grid.splice(y, 1);
+        this.grid.unshift(Array(COLS).fill(0));
+      }
+    });
+  }
 
   @HostListener('window:keydown', ['$event'])
   keyevent(event: KeyboardEvent) {
@@ -112,9 +119,7 @@ export class GridComponent implements OnInit {
       if (this.service.valid(p, this.grid)) {
         this.piece.move(p);
       }
-      this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.animate();
-      console.log(this.piece.x, this.piece.y);
     }
   }
 }

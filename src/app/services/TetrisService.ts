@@ -28,7 +28,7 @@ valid(p: IPiece, board: number[][]): boolean {
         return (
           this.isEmpty(value) ||
         (this.insideWalls(x) &&
-          this.aboveFloor(y) //&& board[p.y + y][p.x + x] === 0
+          this.aboveFloor(y) && board[y][x] === 0
         ));
     });
   });
