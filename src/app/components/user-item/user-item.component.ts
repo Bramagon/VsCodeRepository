@@ -1,7 +1,7 @@
+import { User } from './../../Models/User';
 import { Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { User } from 'src/app/Models/User';
 
 @Component({
   selector: 'app-user-item',

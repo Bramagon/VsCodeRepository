@@ -2,7 +2,7 @@ import { TetrisService } from './../../../services/TetrisService';
 import { IPiece } from './../../../Models/Piece';
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { COLS, BLOCK_SIZE, ROWS, KEY, COLORS, SHAPES } from './../../../constants';
-import { Piece } from 'src/app/Models/Piece';
+import { Piece } from '../../../Models/Piece';
 
 
 @Component({
@@ -43,7 +43,7 @@ export class GridComponent implements OnInit {
     requestAnimationFrame(this.animate.bind(this));
   }
 
-  draw(){
+  draw() {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.piece.draw();
     this.drawBoard();
@@ -53,7 +53,7 @@ export class GridComponent implements OnInit {
     this.grid.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value > 0) {
-          this.ctx.fillStyle = COLORS[value-1];
+          this.ctx.fillStyle = COLORS[value - 1];
           this.ctx.fillRect(x, y, 1, 1);
         }
       });
@@ -62,10 +62,11 @@ export class GridComponent implements OnInit {
 
   drop() {
     const p = this.moves[KEY.SPACE](this.piece);
-      if (this.service.valid(p, this.grid)) {
+    if (this.service.valid(p, this.grid)) {
         this.piece.move(p);
+      } else {
+        this.freeze();
       }
-      else this.freeze();
   }
 
   freeze() {
@@ -90,8 +91,8 @@ export class GridComponent implements OnInit {
   getEmptyBoard(): number[][] {
     return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
   }
-  spawnPiece(){
-    const typeId = this.service.randomizeTetromino(SHAPES.length)
+  spawnPiece() {
+    const typeId = this.service.randomizeTetromino(SHAPES.length);
     this.piece = new Piece(this.ctx, typeId);
   }
 
@@ -102,7 +103,7 @@ export class GridComponent implements OnInit {
     console.table(this.grid);
 
   }
-  clearlines(){
+  clearlines() {
   this.grid.forEach((row, y) => {
       if (row.every(value => value > 0)) {
         this.grid.splice(y, 1);

@@ -8,6 +8,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class AddUserComponent implements OnInit {
   @Output() addUser: EventEmitter<any> = new EventEmitter();
   name: string;
+  password: string;
 
   constructor() { }
 
@@ -16,7 +17,8 @@ export class AddUserComponent implements OnInit {
 
   onSubmit() {
     const user = {
-      name: this.name
+      name: this.name,
+      password: this.password
     };
 
     this.addUser.emit(user);
