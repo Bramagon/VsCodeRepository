@@ -1,5 +1,10 @@
 export class User {
   name: string;
-  pwhash: string;
+  pass: string;
   id: number;
+
+  constructor(name: string, pass: string){
+
+  }
+
 }
