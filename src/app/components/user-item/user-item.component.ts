@@ -10,7 +10,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 })
 export class UserItemComponent implements OnInit {
   @Input() user: User;
-  @Output() deleteUser: EventEmitter<User> = new EventEmitter();
+
 
   constructor(private userService: UserService) { }
 
@@ -18,8 +18,9 @@ export class UserItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onDelete(user) {
-    this.deleteUser.emit(user);
+  onLogout(user) {
+    localStorage.removeItem('token');
+    console.log('removed');
   }
 
 }

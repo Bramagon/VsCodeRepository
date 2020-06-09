@@ -1,7 +1,8 @@
-<app-add-user (addUser)="addUser($event)"></app-add-user>
+<!-- <app-add-user (addUser)="addUser($event)"></app-add-user> -->
+<app-login (loginUser)="loginUser($event)"></app-login>
+
 <app-user-item
-  *ngFor="let user of users"
   [user]="user"
-  (deleteUser)="deleteUser($event)"
+  (logoutUser)="logoutUser($event)"
 ></app-user-item>
 

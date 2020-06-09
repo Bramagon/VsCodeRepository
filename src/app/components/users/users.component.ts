@@ -8,24 +8,26 @@ import { User } from '../../Models/User';
   styleUrls: ['./users.component.css']
 })
 export class UserComponent implements OnInit {
-  users: User[];
-
+  user: User;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe(users => {
-      this.users = users;
+    this.userService.getUser().subscribe(usr => {
+      this.user = usr;
     });
   }
 
-  deleteUser(user: User) {
-    this.users = this.users.filter(usr => usr.id !== user.id);
-    this.userService.deleteUser(user).subscribe();
+  logoutUser(user: User) {
+    this.userService.logOut();
   }
 
   addUser(user: User) {
-    this.userService.addUser(user).subscribe(usr => {
-      this.users.push(usr);
-    });
+    this.userService.addUser(user).subscribe();
+  }
+
+  loginUser(user: User) {
+    this.userService.loginUser(user).subscribe(
+      (usr => this.user = usr)
+    );
   }
 }

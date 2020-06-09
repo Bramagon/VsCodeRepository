@@ -8,9 +8,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  service: UserService;
+  @Output() loginUser: EventEmitter<any> = new EventEmitter();
   name: string;
   password: string;
+  service: UserService;
 
   constructor(private userService: UserService) { }
 
@@ -18,9 +19,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.loginUser(new User(this.name, this.password));
-  }
-  onCreate(){
+    const user = {
+      name: this.name,
+      password: this.password
+    };
+
+    this.loginUser.emit(user);
 
   }
 }

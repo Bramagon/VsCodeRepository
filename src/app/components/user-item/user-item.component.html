@@ -1,6 +1,9 @@
-<div class="user">
-  <b>
-    {{ user.name }}
-    <button (click)="onDelete(user)" class="del">x</button>
-  </b>
+
+<div *ngIf="user">
+  <div class="user">
+    <b>
+      {{ user.name }}
+      <button (click)="onLogout(user)" class="del">x</button>
+    </b>
+  </div>
 </div>
