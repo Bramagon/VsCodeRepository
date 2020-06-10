@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-  users: User[];
+  user: User;
   constructor() { }
 
   ngOnInit(): void {

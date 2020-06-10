@@ -1,3 +1,4 @@
+import { Router, RouterModule } from '@angular/router';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/Models/User';
 import { UserService } from 'src/app/services/user.service';

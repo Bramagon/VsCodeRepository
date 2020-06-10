@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../Models/User';
 import { Observable, of } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 
@@ -24,11 +24,6 @@ export class UserService {
     return this.http.get<User>(url);
   }
 
-  logOut() {
-    localStorage.removeItem('token');
-    console.log('removed');
-  }
-
   deleteUser(user: User): Observable<User> {
     const url = `${this.userUrl}/${user.id}`;
     return this.http.delete<User>(url, httpOptions);
@@ -39,9 +34,9 @@ export class UserService {
     return this.http.post<User>(url, user, httpOptions);
   }
 
-  loginUser(user: User): Observable<User> {
+  loginUser(user: User) {
     const url = `${this.userUrl}/Login`;
-    return this.setToken(this.http.post<User>(url, user, httpOptions).pipe(shareReplay()));
+    return this.setToken(this.http.post<User>(url, user, httpOptions));
   }
 
   setToken(user: Observable<User>): Observable<User> {

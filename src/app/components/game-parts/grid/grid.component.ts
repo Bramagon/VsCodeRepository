@@ -1,9 +1,10 @@
+import { Points } from './../../../Models/Points';
 import { TetrisService } from './../../../services/TetrisService';
 import { IPiece } from './../../../Models/Piece';
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { COLS, BLOCK_SIZE, ROWS, KEY, COLORS, SHAPES } from './../../../constants';
 import { Piece } from '../../../Models/Piece';
-
+import { Key } from 'protractor';
 
 @Component({
   selector: 'app-grid',
@@ -16,9 +17,9 @@ export class GridComponent implements OnInit {
   grid: number[][];
   ctx: CanvasRenderingContext2D;
   piece: Piece;
-  points: number;
-  lines: number;
-  level: number;
+  points: number = 0;
+  lines: number = 0;
+  level: number = 0;
   service: TetrisService = new TetrisService();
   time = { start: 0, elapsed: 0, level: 1000 };
   moves = {
@@ -63,6 +64,7 @@ export class GridComponent implements OnInit {
   drop() {
     const p = this.moves[KEY.SPACE](this.piece);
     if (this.service.valid(p, this.grid)) {
+        this.points += Points.SOFT_DROP;
         this.piece.move(p);
       } else {
         this.freeze();
@@ -114,13 +116,22 @@ export class GridComponent implements OnInit {
 
   @HostListener('window:keydown', ['$event'])
   keyevent(event: KeyboardEvent) {
+
     if (this.moves[event.keyCode]) {
       event.preventDefault();
       const p = this.moves[event.keyCode](this.piece);
-      if (this.service.valid(p, this.grid)) {
+      if (event.key === ' ') {
+        if (this.service.valid(p, this.grid)) {
+          this.piece.move(p);
+          this.points += Points.HARD_DROP;
+        }
+      } else if (this.service.valid(p, this.grid)) {
         this.piece.move(p);
+        if (event.key === 'ArrowDown') {
+          this.points += Points.SOFT_DROP;
+        }
+        this.animate();
       }
-      this.animate();
     }
   }
 }

@@ -22,8 +22,8 @@ import { HomeComponent } from './components/home/home.component';
   declarations: [
     AppComponent,
     UserComponent,
-    UserItemComponent,
     HeaderComponent,
+    UserItemComponent,
     AddUserComponent,
     AboutComponent,
     TetrisComponent,
@@ -43,7 +43,8 @@ import { HomeComponent } from './components/home/home.component';
       useClass: TokenInterceptor,
       multi: true
     },
-    JwtHelperService
+    JwtHelperService,
+    UserItemComponent
   ],
   bootstrap: [AppComponent]
 })

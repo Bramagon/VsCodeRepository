@@ -1,9 +1,10 @@
 
 <div *ngIf="user">
   <div class="user">
-    <b>
+    <h3>Logged in as:</h3>
+    <b style="color:green">
       {{ user.name }}
-      <button (click)="onLogout(user)" class="del">x</button>
+      <button (click)="onLogout(user)" class="del">Logout</button>
     </b>
   </div>
 </div>

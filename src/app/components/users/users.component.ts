@@ -1,5 +1,6 @@
+import { UserItemComponent } from './../user-item/user-item.component';
 import { UserService } from '../../services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../../Models/User';
 
 @Component({
@@ -8,26 +9,19 @@ import { User } from '../../Models/User';
   styleUrls: ['./users.component.css']
 })
 export class UserComponent implements OnInit {
+  constructor(private userService: UserService, private useritem: UserItemComponent) { }
+
   user: User;
-  constructor(private userService: UserService) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    this.userService.getUser().subscribe(usr => {
-      this.user = usr;
-    });
-  }
-
-  logoutUser(user: User) {
-    this.userService.logOut();
-  }
 
   addUser(user: User) {
     this.userService.addUser(user).subscribe();
+    this.loginUser(user);
   }
 
   loginUser(user: User) {
-    this.userService.loginUser(user).subscribe(
-      (usr => this.user = usr)
-    );
+    this.userService.loginUser(user).subscribe();
+    this.userService.getUser().subscribe(u => this.useritem.user = u);
   }
 }

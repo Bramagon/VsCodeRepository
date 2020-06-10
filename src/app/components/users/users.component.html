@@ -1,8 +1,8 @@
-<!-- <app-add-user (addUser)="addUser($event)"></app-add-user> -->
-<app-login (loginUser)="loginUser($event)"></app-login>
+<br>
+<p class="title">Here you can login to an account or create a new one.<br>
+  Scores earned during gameplay are tied to your account.</p><br>
+<app-login (loginUser)="loginUser($event)"></app-login><br>
 
-<app-user-item
-  [user]="user"
-  (logoutUser)="logoutUser($event)"
-></app-user-item>
+<app-add-user (addUser)="addUser($event)"></app-add-user>
+
 

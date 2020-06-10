@@ -8,19 +8,18 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
   templateUrl: './user-item.component.html',
   styleUrls: ['./user-item.component.css']
 })
-export class UserItemComponent implements OnInit {
-  @Input() user: User;
+export class UserItemComponent {
+  user: User;
 
-
-  constructor(private userService: UserService) { }
-
-
-  ngOnInit(): void {
+  constructor(private userService: UserService) {
+    this.userService.getUser().subscribe(u => this.user = u);
   }
+
 
   onLogout(user) {
     localStorage.removeItem('token');
     console.log('removed');
+    window.location.reload();
   }
 
 }
