@@ -16,6 +16,11 @@ export class UserItemComponent {
   }
 
 
+  refreshComponent(user: User){
+    user = user;
+    window.location.reload();
+  }
+
   onLogout(user) {
     localStorage.removeItem('token');
     console.log('removed');

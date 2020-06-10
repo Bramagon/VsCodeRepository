@@ -21,7 +21,7 @@ export class UserService {
 
   getUser(): Observable<User> {
     const url = `${this.userUrl}/GetUser`;
-    return this.http.get<User>(url);
+    return this.http.get<User>(url, httpOptions);
   }
 
   deleteUser(user: User): Observable<User> {

@@ -21,7 +21,6 @@ export class UserComponent implements OnInit {
   }
 
   loginUser(user: User) {
-    this.userService.loginUser(user).subscribe();
-    this.userService.getUser().subscribe(u => this.useritem.user = u);
+    this.userService.loginUser(user).subscribe(u => this.useritem.refreshComponent(u));
   }
 }
