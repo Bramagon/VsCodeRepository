@@ -31,7 +31,7 @@ export class UserService {
 
   addUser(user: User): Observable<User> {
     const url = `${this.userUrl}/PostUser`;
-    return this.http.post<User>(url, user, httpOptions);
+    return this.setToken(this.http.post<User>(url, user, httpOptions));
   }
 
   loginUser(user: User) {

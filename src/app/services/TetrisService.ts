@@ -34,19 +34,27 @@ valid(p: IPiece, board: number[][]): boolean {
   });
 }
 
-rotate(p: IPiece): IPiece {
+rotate(p: IPiece, board: number[][]) {
   let clone: IPiece = JSON.parse(JSON.stringify(p));
 
-  for (let y = 0; y < p.shape.length; y++) {
+  for (let y = 0; y < clone.shape.length; y++) {
     for (let x = 0; x < y; x++) {
-      [p.shape[x][y], p.shape[y][x]] =
-      [p.shape[y][x], p.shape[x][y]];
+      [clone.shape[x][y], clone.shape[y][x]] =
+      [clone.shape[y][x], clone.shape[x][y]];
     }
   }
+  clone.shape.forEach(row => row.reverse());
+  if (this.valid(clone, board)){
+    for (let y = 0; y < p.shape.length; y++) {
+      for (let x = 0; x < y; x++) {
+        [p.shape[x][y], p.shape[y][x]] =
+        [p.shape[y][x], p.shape[x][y]];
+      }
+    }
+    p.shape.forEach(row => row.reverse());
+  }
+  return p;
 
-  p.shape.forEach(row => row.reverse());
-
-  return clone;
 }
 
 randomizeTetromino(amountOfTypes: number): number {
