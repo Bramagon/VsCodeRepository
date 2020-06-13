@@ -1,4 +1,4 @@
-import { Points } from './../../../Models/Points';
+import { Points, Level } from './../../../Models/Points';
 import { TetrisService } from './../../../services/TetrisService';
 import { IPiece } from './../../../Models/Piece';
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
@@ -41,7 +41,7 @@ export class GridComponent implements OnInit {
       this.userService.getUser().subscribe(u => this.user = u);
     }
     this.initGrid();
-    this.resetGame()
+    this.resetGame();
   }
 
   animate(now = 0) {
@@ -51,11 +51,19 @@ export class GridComponent implements OnInit {
       this.drop();
     }
     this.draw();
-    if (!this.alive){
+    if (!this.alive) {
       this.gameOver();
       return;
     }
+    if (this.score.Level < 10 && this.score.Lines / (10 * this.score.Level) >= 1) {
+      this.score.Level += 1;
+      this.setSpeed();
+    }
     requestAnimationFrame(this.animate.bind(this));
+  }
+
+  setSpeed( ) {
+    this.time.level = Level[this.score.Level];
   }
 
   draw() {
@@ -93,7 +101,7 @@ export class GridComponent implements OnInit {
     this.ctx.fillText('GAME OVER', 1.8, 4);
     if (this.user != null){
       this.score.UserId = this.user.id;
-      // Post score for user
+      // todo: Post score for user
     }
   }
 
@@ -149,10 +157,11 @@ export class GridComponent implements OnInit {
   }
 
   resetGame() {
-    this.score.Points = 0; 
+    this.score.Points = 0;
     this.score.Lines = 0;
-    this.score.Level = 0;
+    this.score.Level = 1;
     this.grid = this.getEmptyBoard();
+    this.setSpeed();
   }
 
   @HostListener('window:keydown', ['$event'])
