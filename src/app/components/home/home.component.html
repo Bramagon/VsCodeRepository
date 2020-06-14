@@ -1,15 +1,18 @@
+<div *ngIf="notLoggedIn()">
+  <h1 class='title'>Welcome to AngularGame!</h1>
+  <p class='paragraph' >
+    You can play without logging in but your highscores won't be saved.<br>
+    Click 'account' on the top of this page to create an account or login to an existing one.
+  </p>
+</div>
 
-<h1 class='title'>Welcome to AngularGame!</h1>
-<p class='paragraph' *ngIf="notLoggedIn()">
-  You can play without logging in but your highscores won't be saved.<br>
-  Click 'account' on the top of this page to create an account or login to an existing one.
-</p>
+
 <div *ngIf="!notLoggedIn()">
   <div *ngIf="user$ | async as user">
+    <h1 class='title'>Welcome to AngularGame: {{user.name}}!</h1>
     <br>
       <div class='paragraph' *ngIf="score$ | async as score">
-        {{ score.pointCount }}
-        <p>Name: {{user.name}}</p>
+        <h2>Your best score:</h2>
         <p>Score: {{ score.pointsCount.toString() }}</p>
         <p>Lines: {{ score.linesCount.toString() }}</p>
         <p>Level: {{ score.levelCount.toString() }}</p>

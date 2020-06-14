@@ -1,11 +1,29 @@
 .header {
   background: #333;
   color: #fff;
-  text-align: center;
-  padding: 10px;
+  text-align: center !important;
+  align-content: center !important;
+  padding: 0px;
 }
 
 .header a {
   color: #fff;
   text-decoration: none;
+}
+
+.spacer :hover {
+  cursor: default;
+}
+
+nav {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  padding: 0;
+  list-style: none;
+  margin-left: 0px; 
+
+}
+nav :hover {
+  color: red;
 }

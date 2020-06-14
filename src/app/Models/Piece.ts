@@ -31,6 +31,7 @@ export class Piece implements IPiece {
       row.forEach((value, x) => {
         if (value > 0) {
           this.ctx.fillRect(this.x + x, this.y + y, 1, 1);
+
         }
       });
     });

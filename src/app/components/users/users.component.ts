@@ -1,5 +1,5 @@
 import { UserItemComponent } from './../user-item/user-item.component';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/UserService';
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../../Models/User';
 

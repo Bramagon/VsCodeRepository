@@ -6,7 +6,7 @@ import { COLS, BLOCK_SIZE, ROWS, KEY, COLORS, SHAPES } from './../../../constant
 import { Piece } from '../../../Models/Piece';
 import { Key } from 'protractor';
 import { Scoreboard } from 'src/app/Models/Scoreboard';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/services/UserService';
 import { User } from 'src/app/Models/User';
 import { ScoreService } from 'src/app/services/ScoreService';
 import { Observable, Subscription } from 'rxjs';
@@ -18,7 +18,6 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class GridComponent implements OnInit {
   @ViewChild('board', { static: true} )
-  private subscription: Subscription;
   canvas: ElementRef<HTMLCanvasElement>;
   user: User;
   grid: number[][];
@@ -34,7 +33,7 @@ export class GridComponent implements OnInit {
     [KEY.UP]: (p: IPiece): IPiece => this.service.rotate(p, this.grid),
     [KEY.SPACE]: (p: IPiece): IPiece => ({ ...p, y: p.y + 1 })
   };
-
+  private subscription: Subscription;
   constructor(private userService: UserService, private scoreService: ScoreService) {
   }
 
@@ -106,8 +105,11 @@ export class GridComponent implements OnInit {
       console.log('updating score...');
       this.score.UserId = this.user.id;
       // todo: Post score for user
-      this.scoreService.addScore(this.score);
     }
+  }
+
+  saveScore() {
+    this.scoreService.addScore(this.score);
   }
 
   freeze() {
@@ -148,7 +150,6 @@ export class GridComponent implements OnInit {
     this.grid = this.getEmptyBoard();
     this.spawnPiece();
     this.animate();
-    console.table(this.grid);
   }
 
   clearlines() {
@@ -170,24 +171,27 @@ export class GridComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription != null) { 
+      this.subscription.unsubscribe();
+    }
   }
 
   @HostListener('window:keydown', ['$event'])
   keyevent(event: KeyboardEvent) {
+    if (this.alive) {
+      if (this.moves[event.keyCode]) {
+        event.preventDefault();
+        const p = this.moves[event.keyCode](this.piece);
 
-    if (this.moves[event.keyCode]) {
-      event.preventDefault();
-      const p = this.moves[event.keyCode](this.piece);
-
-      if (event.key === ' ') {
-        if (this.service.valid(p, this.grid)) {
+        if (event.key === ' ') {
+          if (this.service.valid(p, this.grid)) {
+            this.piece.move(p);
+            this.score.pointsCount += Points.HARD_DROP;
+          }
+        } else if (this.service.valid(p, this.grid)) {
           this.piece.move(p);
-          this.score.pointsCount += Points.HARD_DROP;
+          this.animate();
         }
-      } else if (this.service.valid(p, this.grid)) {
-        this.piece.move(p);
-        this.animate();
       }
     }
   }

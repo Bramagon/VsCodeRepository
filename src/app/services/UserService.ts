@@ -2,7 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../Models/User';
 import { Observable, of } from 'rxjs';
-import { shareReplay, map } from 'rxjs/operators';
+import { shareReplay, map, share } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 
@@ -21,22 +21,22 @@ export class UserService {
 
   getUser(): Observable<User> {
     const url = `${this.userUrl}/GetUser`;
-    return this.http.get<User>(url, httpOptions);
+    return this.http.get<User>(url, httpOptions).pipe(share(), map(res => res));
   }
 
   deleteUser(user: User): Observable<User> {
     const url = `${this.userUrl}/${user.id}`;
-    return this.http.delete<User>(url, httpOptions);
+    return this.http.delete<User>(url, httpOptions).pipe(share(), map(res => res));
   }
 
   addUser(user: User): Observable<User> {
     const url = `${this.userUrl}/PostUser`;
-    return this.setToken(this.http.post<User>(url, user, httpOptions));
+    return this.setToken(this.http.post<User>(url, user, httpOptions).pipe(share(), map(res => res)));
   }
 
-  loginUser(user: User) {
+  loginUser(user: User): Observable<User> {
     const url = `${this.userUrl}/Login`;
-    return this.setToken(this.http.post<User>(url, user, httpOptions));
+    return this.setToken(this.http.post<User>(url, user, httpOptions).pipe(share(), map(res => res)));
   }
 
   setToken(user: Observable<User>): Observable<User> {

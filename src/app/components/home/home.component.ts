@@ -1,6 +1,6 @@
 import { Scoreboard } from './../../Models/Scoreboard';
 import { User } from 'src/app/Models/User';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/services/UserService';
 import { Component, OnInit, Input } from '@angular/core';
 import { ScoreService } from 'src/app/services/ScoreService';
 import { Observable } from 'rxjs';

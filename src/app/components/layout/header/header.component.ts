@@ -1,7 +1,9 @@
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/services/UserService';
 import { User } from 'src/app/Models/User';
 import { Component, OnInit, Input } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
+import { ThemeService } from 'src/app/services/ThemeService';
+import { Option } from '../../../Models/preferences';
 
 @Component({
   selector: 'app-header',
@@ -9,11 +11,15 @@ import { Subject, Observable } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private userService: UserService) { }
+  options$: Observable<Array<Option>> = this.themeService.getThemeOptions();
 
+  constructor(private readonly themeService: ThemeService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.themeService.setTheme("deeppurple-amber");
+  }
 
-
+  themeChangeHandler(themeToSet) {
+    this.themeService.setTheme(themeToSet);
   }
 }

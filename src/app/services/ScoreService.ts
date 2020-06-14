@@ -3,9 +3,8 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../Models/User';
 import { Observable, of } from 'rxjs';
-import { shareReplay, map } from 'rxjs/operators';
+import { shareReplay, map, share } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,22 +21,26 @@ export class ScoreService {
 
   getTopScoreUser(): Observable<Scoreboard> {
     const url = `${this.scoreUrl}`;
-    return this.http.get<Scoreboard>(url, httpOptions);
+    return this.http.get<Scoreboard>(url, httpOptions)
+      .pipe(share(), map(res => res));
   }
 
   deleteScores(): Observable<Scoreboard> {
     const url = `${this.scoreUrl}`;
-    return this.http.delete<Scoreboard>(url, httpOptions);
+    return this.http.delete<Scoreboard>(url, httpOptions)
+      .pipe(share(), map(res => res));
   }
 
   getTopScoreOverall(): Observable<Scoreboard> {
     const url = `${this.scoreUrl}/GetTopScores`;
-    return this.http.get<Scoreboard>(url, httpOptions);
+    return this.http.get<Scoreboard>(url, httpOptions)
+      .pipe(share(), map(res => res));
   }
 
   addScore(score: Scoreboard) {
     const url = `${this.scoreUrl}/PostTetrisScores`;
-    return this.http.post<Scoreboard>(url, score, httpOptions).subscribe(s => console.log(s));
+    return this.http.post<Scoreboard>(url, score, httpOptions).pipe(share(), map(res => res)).subscribe(s => console.log(s))
+    
   }
 
 }

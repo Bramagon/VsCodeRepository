@@ -1,10 +1,19 @@
-<header class="header">
-  <h1>AngularGame
-  </h1>
-  <nav>
-    <a routerLink="/">Home</a> |  <a routerLink="/login">Account</a> | <a routerLink="/Tetris">Tetris</a> | <a routerLink="/about">About</a>
-  </nav>
-</header>
+  <div class="header">
+    <mat-toolbar color="primary">
+      <h1>AngularGame     
+      </h1>
+      <mat-toolbar-row >
+        <nav>
+          <a routerLink="/">Home</a> |  <a routerLink="/login">Account</a> | <a routerLink="/Tetris">Tetris</a> | <a routerLink="/about">About</a>
+        </nav>
+        <span class="spacer"></span>
+        <app-menu 
+          [options]="options$ | async"
+          (themeChange)="themeChangeHandler($event)">
+        </app-menu>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
 <app-user-item>
 </app-user-item>
 

@@ -1,6 +1,6 @@
 import { User } from './../../Models/User';
 import { Observable } from 'rxjs';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/UserService';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
@@ -9,11 +9,13 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./user-item.component.css']
 })
 export class UserItemComponent implements OnInit {
-  user: User;
+  user$: Observable<User>;
 
   constructor(private userService: UserService) { }
   ngOnInit() {
-    this.userService.getUser().subscribe(u => this.user = u);
+    if (localStorage.getItem('token') !== null) {
+      this.user$ = this.userService.getUser();
+    }
   }
 
   refreshComponent(user: User) {

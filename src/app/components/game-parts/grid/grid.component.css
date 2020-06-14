@@ -3,12 +3,12 @@
   left: 25%;
   top: 15%;
   border:5px solid black;
-  background-color: gray;
+  background-color: lightsteelblue;
 }
 
 .right-column {
   position: absolute;
-  top: 15%;
+  top: 25%;
   left: 50%;
 }
 

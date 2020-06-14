@@ -1,5 +1,5 @@
 
-<div *ngIf="user">
+<div *ngIf="user$ | async as user">
   <div class="user">
     <h3>Logged in as:</h3>
     <b style="color:green">
