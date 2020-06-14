@@ -8,6 +8,8 @@ import { Key } from 'protractor';
 import { Scoreboard } from 'src/app/Models/Scoreboard';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/Models/User';
+import { ScoreService } from 'src/app/services/ScoreService';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-grid',
@@ -16,6 +18,7 @@ import { User } from 'src/app/Models/User';
 })
 export class GridComponent implements OnInit {
   @ViewChild('board', { static: true} )
+  private subscription: Subscription;
   canvas: ElementRef<HTMLCanvasElement>;
   user: User;
   grid: number[][];
@@ -32,13 +35,12 @@ export class GridComponent implements OnInit {
     [KEY.SPACE]: (p: IPiece): IPiece => ({ ...p, y: p.y + 1 })
   };
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private scoreService: ScoreService) {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('token') != null)
-    {
-      this.userService.getUser().subscribe(u => this.user = u);
+    if (localStorage.getItem('token') != null) {
+      this.subscription = this.userService.getUser().subscribe(u => this.user = u);
     }
     this.initGrid();
     this.resetGame();
@@ -51,19 +53,20 @@ export class GridComponent implements OnInit {
       this.drop();
     }
     this.draw();
-    if (!this.alive) {
+    if (this.score.levelCount < 10 && this.score.linesCount / (10 * this.score.levelCount) >= 1) {
+      this.score.levelCount += 1;
+      this.setSpeed();
+    }
+    if (this.alive) {
+    requestAnimationFrame(this.animate.bind(this));
+    } else {
       this.gameOver();
       return;
     }
-    if (this.score.Level < 10 && this.score.Lines / (10 * this.score.Level) >= 1) {
-      this.score.Level += 1;
-      this.setSpeed();
-    }
-    requestAnimationFrame(this.animate.bind(this));
   }
 
   setSpeed( ) {
-    this.time.level = Level[this.score.Level];
+    this.time.level = Level[this.score.levelCount];
   }
 
   draw() {
@@ -86,27 +89,29 @@ export class GridComponent implements OnInit {
   drop() {
     const p = this.moves[KEY.SPACE](this.piece);
     if (this.service.valid(p, this.grid)) {
-        this.score.Points += Points.SOFT_DROP;
+        this.score.pointsCount += Points.SOFT_DROP;
         this.piece.move(p);
       } else {
         this.freeze();
       }
   }
 
-  gameOver(){
+  gameOver() {
     this.ctx.fillStyle = 'black';
     this.ctx.fillRect(1, 3, 8, 1.2);
     this.ctx.font = '1px Arial';
     this.ctx.fillStyle = 'red';
     this.ctx.fillText('GAME OVER', 1.8, 4);
-    if (this.user != null){
+    if (this.user != null) {
+      console.log('updating score...');
       this.score.UserId = this.user.id;
       // todo: Post score for user
+      this.scoreService.addScore(this.score);
     }
   }
 
   freeze() {
-    if (this.piece.y === 0){
+    if (this.piece.y === 0) {
       this.alive = false;
     }
     this.piece.shape.forEach((row, y) => {
@@ -138,7 +143,7 @@ export class GridComponent implements OnInit {
   }
 
   play() {
-    this.resetGame()
+    this.resetGame();
     this.alive = true;
     this.grid = this.getEmptyBoard();
     this.spawnPiece();
@@ -151,17 +156,21 @@ export class GridComponent implements OnInit {
       if (row.every(value => value > 0)) {
         this.grid.splice(y, 1);
         this.grid.unshift(Array(COLS).fill(0));
-        this.score.Lines += 1;
+        this.score.linesCount += 1;
       }
     });
   }
 
   resetGame() {
-    this.score.Points = 0;
-    this.score.Lines = 0;
-    this.score.Level = 1;
+    this.score.pointsCount = 0;
+    this.score.linesCount = 0;
+    this.score.levelCount = 1;
     this.grid = this.getEmptyBoard();
     this.setSpeed();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -174,7 +183,7 @@ export class GridComponent implements OnInit {
       if (event.key === ' ') {
         if (this.service.valid(p, this.grid)) {
           this.piece.move(p);
-          this.score.Points += Points.HARD_DROP;
+          this.score.pointsCount += Points.HARD_DROP;
         }
       } else if (this.service.valid(p, this.grid)) {
         this.piece.move(p);

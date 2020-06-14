@@ -1,5 +1,6 @@
 import { TokenInterceptor } from './services/TokenInterceptor';
 import { UserService } from './services/user.service';
+import { ScoreService } from './services/ScoreService';
 import { LoginComponent } from './components/login-user/login/login.component';
 import { TetrisComponent } from './components/pages/tetris/tetris.component';
 import { BrowserModule } from '@angular/platform-browser';

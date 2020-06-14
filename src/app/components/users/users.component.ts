@@ -10,7 +10,7 @@ import { User } from '../../Models/User';
 })
 export class UserComponent implements OnInit {
   constructor(private userService: UserService, private useritem: UserItemComponent) { }
-
+  @Output() getUser: EventEmitter<any> = new EventEmitter();
   user: User;
   ngOnInit(): void {}
 
@@ -21,5 +21,6 @@ export class UserComponent implements OnInit {
 
   loginUser(user: User) {
     this.userService.loginUser(user).subscribe(u => this.useritem.refreshComponent(u));
+    this.getUser.emit(user);
   }
 }

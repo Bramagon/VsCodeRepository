@@ -44,7 +44,7 @@ rotate(p: IPiece, board: number[][]) {
     }
   }
   clone.shape.forEach(row => row.reverse());
-  if (this.valid(clone, board)){
+  if (this.valid(clone, board)) {
     for (let y = 0; y < p.shape.length; y++) {
       for (let x = 0; x < y; x++) {
         [p.shape[x][y], p.shape[y][x]] =

@@ -1,8 +1,9 @@
 export class Scoreboard {
 
+    Id: number;
     UserId: number;
-    Points: number;
-    Lines: number;
-    Level: number;
+    pointsCount: number;
+    linesCount: number;
+    levelCount: number;
 
 }

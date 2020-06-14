@@ -8,16 +8,15 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
   templateUrl: './user-item.component.html',
   styleUrls: ['./user-item.component.css']
 })
-export class UserItemComponent implements OnInit{
+export class UserItemComponent implements OnInit {
   user: User;
 
   constructor(private userService: UserService) { }
-    
-  ngOnInit(){
+  ngOnInit() {
     this.userService.getUser().subscribe(u => this.user = u);
   }
 
-  refreshComponent(user: User){
+  refreshComponent(user: User) {
     user = user;
     window.location.reload();
   }
