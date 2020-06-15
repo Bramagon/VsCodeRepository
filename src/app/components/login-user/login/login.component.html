@@ -2,7 +2,7 @@
 <form class="form" (ngSubmit)="onSubmit()">
   <input type="text" name="name" [(ngModel)]="name"
   placeholder="Enter name">
-  <input (click)="showPass()" value="Show:" class="btn">
+  <input type="submit" (click)="showPass()" value="Show:" class="btn">
   <input [type]="show ? 'text' : 'password'" name="password" #create [(ngModel)]="password"
   placeholder="Enter password">
   <input type="submit" value="Submit" class="btn">

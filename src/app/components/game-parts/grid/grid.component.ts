@@ -102,9 +102,7 @@ export class GridComponent implements OnInit {
     this.ctx.fillStyle = 'red';
     this.ctx.fillText('GAME OVER', 1.8, 4);
     if (this.user != null) {
-      console.log('updating score...');
       this.score.UserId = this.user.id;
-      // todo: Post score for user
     }
   }
 
