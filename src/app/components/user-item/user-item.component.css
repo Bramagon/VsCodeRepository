@@ -1,11 +1,15 @@
 .del {
-  background: #ff0000;
+  background: red;
   color: #fff;
   border: none;
   padding: 5px 9px;
   cursor: pointer;
   float: right;
 
+}
+
+Button:hover[class="del"]{
+  background: darkred;
 }
 
 .user {

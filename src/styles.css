@@ -18,9 +18,16 @@ body{
   line-height: 2.0;
 }
 
+a:hover {
+  font-weight:  bolder;
+  text-shadow: 0px 0px 15px lightsteelblue;
+  
+}
+
 a {
   color: #333;
   text-decoration: none;
+  
 }
 
 .container {
@@ -37,12 +44,14 @@ a {
   width: 5%;
 }
 Button:hover {
-  background-color: #4CAF50; /* Green */
+  background-color: lightsteelblue !important;
+  box-shadow: 0px 0px 10px lightsteelblue; /* Green */
   color: white;
 }
 
 .btn:hover{
-  background: #666;
+  background: lightsteelblue !important;
+  box-shadow: 0px 0px 10px lightsteelblue; /* Green */
 }
 
 input {
