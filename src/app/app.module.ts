@@ -1,6 +1,4 @@
 import { TokenInterceptor } from './services/TokenInterceptor';
-import { UserService } from './services/UserService';
-import { ScoreService } from './services/ScoreService';
 import { LoginComponent } from './components/login-user/login/login.component';
 import { TetrisComponent } from './components/pages/tetris/tetris.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,22 +18,10 @@ import { GridComponent } from './components/game-parts/grid/grid.component';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule} from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 import { ThemeService } from './services/ThemeService';
 import { StyleManagerService } from './services/StyleManager';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-const materialModules = [
-  MatButtonModule,
-  MatMenuModule,
-  MatToolbarModule,
-  MatIconModule,
-  MatCardModule,
-]
+import { AppMaterialModule } from './app-material.module';
 
 @NgModule({
   declarations: [
@@ -52,12 +38,14 @@ const materialModules = [
     MenuComponent
   ],
   imports: [
-    materialModules,
+    AppMaterialModule,
+    BrowserAnimationsModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule
+
+
   ],
   providers: [
     {

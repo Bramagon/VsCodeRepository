@@ -7,6 +7,13 @@
   padding: 5px;
 }
 
+.form input[type='password'] {
+  flex: 10;
+  padding: 5px;
+}
+
 .form input[type='submit'] {
   flex: 2;
 }
+
+

@@ -1,5 +1,5 @@
 /**
- * Source: https://github.com/angular/material.angular.io/blob/master/src/app/shared/style-manager/style-manager.ts
+ * Copied from https://github.com/angular/material.angular.io/blob/master/src/app/shared/style-manager/style-manager.ts
  */
 
 import { Injectable } from "@angular/core";

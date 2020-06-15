@@ -1,8 +1,11 @@
-  <div class="header">
-    <mat-toolbar color="primary">
-      <h1>AngularGame     
-      </h1>
-      <mat-toolbar-row >
+  <div class="header" >
+    <div *ngIf="preference$ | async as pref">
+      <div *ngIf="setUserTheme(pref)">
+      </div>
+    </div>
+    
+      <mat-toolbar color="primary">
+        <div class="Title">AngularGame</div>
         <nav>
           <a routerLink="/">Home</a> |  <a routerLink="/login">Account</a> | <a routerLink="/Tetris">Tetris</a> | <a routerLink="/about">About</a>
         </nav>
@@ -11,9 +14,10 @@
           [options]="options$ | async"
           (themeChange)="themeChangeHandler($event)">
         </app-menu>
-      </mat-toolbar-row>
-    </mat-toolbar>
+      </mat-toolbar>
+
   </div>
+  
 <app-user-item>
 </app-user-item>
 

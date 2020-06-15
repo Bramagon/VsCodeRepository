@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
   name: string;
   password: string;
   service: UserService;
-
+  show: boolean;
+  
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -27,5 +28,9 @@ export class LoginComponent implements OnInit {
 
     this.loginUser.emit(user);
 
+  }
+
+  showPass() {
+    this.show = !this.show;
   }
 }

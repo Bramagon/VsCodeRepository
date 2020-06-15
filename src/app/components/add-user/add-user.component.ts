@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-add-user',
@@ -9,8 +9,9 @@ export class AddUserComponent implements OnInit {
   @Output() addUser: EventEmitter<any> = new EventEmitter();
   name: string;
   password: string;
+  show: boolean;
 
-  constructor() { }
+  constructor() { this.show = false; }
 
   ngOnInit(): void {
   }
@@ -22,5 +23,9 @@ export class AddUserComponent implements OnInit {
     };
 
     this.addUser.emit(user);
+  }
+
+  showPass() {
+    this.show = !this.show;
   }
 }

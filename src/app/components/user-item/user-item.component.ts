@@ -13,13 +13,10 @@ export class UserItemComponent implements OnInit {
 
   constructor(private userService: UserService) { }
   ngOnInit() {
-    if (localStorage.getItem('token') !== null) {
       this.user$ = this.userService.getUser();
-    }
   }
 
   refreshComponent(user: User) {
-    user = user;
     window.location.reload();
   }
 

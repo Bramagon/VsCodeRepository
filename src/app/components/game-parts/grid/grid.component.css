@@ -12,7 +12,8 @@
   left: 50%;
 }
 
-button{
-  color: green;
-  border-style: solid;
+.divider{
+  width:5px;
+  height:auto;
+  display:inline-block;
 }

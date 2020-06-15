@@ -1,10 +1,6 @@
 
 <div *ngIf="user$ | async as user">
-  <div class="user">
-    <h3>Logged in as:</h3>
-    <b style="color:green">
-      {{ user.name }}
+    <div>Logged in as: {{ user.name }}
       <button (click)="onLogout(user)" class="del">Logout</button>
-    </b>
-  </div>
+    </div>
 </div>

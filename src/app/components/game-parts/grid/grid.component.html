@@ -7,7 +7,8 @@
       <p>Lines: {{ score.linesCount }}</p>
       <p>Level: {{ score.levelCount }}</p>
     </div>
-    <button (click)="play()" class="play-button">Play</button><br>
-    <button *ngIf="!alive && score.pointsCount !== 0" (click)="saveScore()" class="save-button">Save</button>
+    <button class="mat-flat-button" (click)="play()">PLAY</button>
+    <div class="divider"></div>
+    <button class="mat-flat-button" *ngIf="!alive && score.pointsCount !== 0" (click)="saveScore()">SAVE</button>
   </div>
 </div>
