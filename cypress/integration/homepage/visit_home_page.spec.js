@@ -1,6 +1,6 @@
 describe("home test", () => {
     it("should visit home page", () => {
-        cy.visit("/");
+        cy.visit("http://localhost:4200/");
 
 
     });

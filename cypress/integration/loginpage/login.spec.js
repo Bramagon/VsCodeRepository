@@ -1,6 +1,6 @@
 describe("login test", () => {
     it("should visit login and create new account", () => {
-      cy.visit("/login");
+      cy.visit("http://localhost:4200/login");
       cy.get('#nameregister').type(Cypress.config('username'));
       cy.get('#passregister').type(Cypress.config('password'));
       cy.get('app-add-user > .form > [value="?"]').click();
