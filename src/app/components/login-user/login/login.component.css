@@ -15,3 +15,13 @@
 .form input[type='submit'] {
   flex: 2;
 }
+
+.aligner{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.invalid{
+  color: red;
+}

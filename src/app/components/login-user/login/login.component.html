@@ -1,10 +1,16 @@
 <h2 style="text-align: center;">Login</h2>
-<form class="form" (ngSubmit)="onSubmit()">
-  <input id="namelogin" type="text" name="name" [(ngModel)]="name"
-  placeholder="Enter name">
-  <input type="button" (click)="showPass()" value="?" class="btn">
-  <input id="passlogin" [type]="show ? 'text' : 'password'" name="password" #create [(ngModel)]="password"
-  placeholder="Enter password">
-  <input type="submit" value="Submit" class="btn">
-</form>
+  <div class="aligner">
+    <form [formGroup]="nameForm">
+      <input id="namelogin" type="text" name="name" formControlName="name" placeholder="Enter name">
+    </form>
+      <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+        <input type="button" (click)="showPass()" value="?" class="btn">
+        <input formControlName="password" id="passlogin" [type]="show ? 'text' : 'password'" name="password" #create formControlName="password" placeholder="Enter password">
 
+        <input type="submit" value="Submit" class="btn">
+
+    </form>
+  </div>
+<div class="aligner">
+  <p class="invalid">{{msg}}</p>
+</div>

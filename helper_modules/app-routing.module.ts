@@ -1,7 +1,7 @@
-import { HomeComponent } from './components/home/home.component';
-import { TetrisComponent } from './components/pages/tetris/tetris.component';
-import { AboutComponent } from './components/pages/about/about.component';
-import { UserComponent } from './components/users/users.component';
+import { HomeComponent } from '../src/app/components/home/home.component';
+import { TetrisComponent } from '../src/app/components/pages/tetris/tetris.component';
+import { AboutComponent } from '../src/app/components/pages/about/about.component';
+import { UserComponent } from '../src/app/components/users/users.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

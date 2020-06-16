@@ -1,11 +1,19 @@
 <h2 style="text-align: center;">Register</h2>
-<form class="form" (ngSubmit)="onSubmit()">
-  <input id="nameregister" type="text" name="name" [(ngModel)]="name"
-  placeholder="Enter name">
-  <input type="button" (click)="showPass()" value="?" class="btn">
-  <input id="passregister" [type]="show ? 'text' : 'password'" name="password" #create [(ngModel)]="password"
-  placeholder="Enter password">
+  <div class="aligner">
+    <form [formGroup]="nameForm">
+      <input id="nameregister" type="text" name="name" formControlName="name" placeholder="Enter name">
+    </form>
+      <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+        <input type="button" (click)="showPass()" value="?" class="btn">
+        <input formControlName="password" id="passregister" [type]="show ? 'text' : 'password'" name="password" #create formControlName="password" placeholder="Enter password">
 
-  <input type="submit" value="Submit" class="btn">
-</form>
+        <input type="submit" value="Submit" class="btn" [disabled]="!passwordIsValid">
 
+    </form>
+  </div>
+  <div class="aligner">Password strength:
+    <app-password-strength [passwordToCheck]="passwordForm.value.password" (passwordStrength)="passwordValid($event)"></app-password-strength>
+  </div>
+  <div class="aligner">
+    <p class="invalid">{{msg}}</p>
+  </div>
