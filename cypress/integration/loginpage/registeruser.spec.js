@@ -4,8 +4,8 @@ describe("login test", () => {
       cy.get('[routerlink="/login"]').click();
       cy.get('#nameregister').type(Cypress.config('username'));
       cy.get('#passregister').type(Cypress.config('password'));
-      cy.get('app-add-user > .form > [value="?"]').click();
-      cy.get('app-add-user > .form > [value="Submit"]').click();
+      cy.get('#showbtn2').click();
+      cy.get('#submitbtn2').click();
       cy.url().should('include', '/login');
 
       

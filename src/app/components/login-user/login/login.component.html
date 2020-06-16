@@ -4,10 +4,10 @@
       <input id="namelogin" type="text" name="name" formControlName="name" placeholder="Enter name">
     </form>
       <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
-        <input type="button" (click)="showPass()" value="?" class="btn">
+        <input type="button" (click)="showPass()" id="showbtn1" value="?" class="btn">
         <input formControlName="password" id="passlogin" [type]="show ? 'text' : 'password'" name="password" #create formControlName="password" placeholder="Enter password">
 
-        <input type="submit" value="Submit" class="btn">
+        <input type="submit" value="Submit" id="submitbtn1" class="btn">
 
     </form>
   </div>

@@ -44,3 +44,13 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+cypress/videos/about/visit_about_page.spec.js.mp4
+cypress/videos/homepage/visit_home_page.spec.js.mp4
+cypress/videos/loginpage/login.spec.js.mp4
+cypress/videos/loginpage/loginuser.spec.js.mp4
+cypress/videos/about/visit_about_page.spec.js.mp4
+cypress/videos/homepage/visit_home_page.spec.js.mp4
+cypress/videos/loginpage/login.spec.js.mp4
+cypress/videos/loginpage/registeruser.spec.js.mp4
+cypress/videos/tetris/visit_tetris_page.spec.js.mp4
+cypress/videos/about/visit_about_page.spec.js.mp4
