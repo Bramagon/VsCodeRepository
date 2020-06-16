@@ -13,7 +13,7 @@ const httpOptions = {
 
 @Injectable()
 export class ThemeService {
-  prefUrl: string = 'https://i346784.venus.fhict.nl/api/Prefs';
+  prefUrl: string = 'https://i346784core.venus.fhict.nl/api/Prefs';
   constructor(
     private http: HttpClient,
     private styleManager: StyleManagerService

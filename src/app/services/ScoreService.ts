@@ -16,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ScoreService {
-  scoreUrl: string = 'https://i346784.venus.fhict.nl/api/Scores';
+  scoreUrl: string = 'https://i346784core.venus.fhict.nl/api/Scores';
   constructor(private http: HttpClient) { }
 
   getTopScoreUser(): Observable<Scoreboard> {
