@@ -7,7 +7,7 @@
     "build": "ng build",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "cypress": "concurrently \"ng serve\" \"cypress open\"",
+    "cypress": "concurrently \"ng serve\" \"npx cypress run\"",
     "test": "concurrently \"ng serve\" \"npx cypress run\"",
     "test2": "set NODE_OPTIONS= npx cypress run"
   },
