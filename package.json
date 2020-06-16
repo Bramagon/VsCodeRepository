@@ -9,7 +9,7 @@
     "e2e": "ng e2e",
     "cypress": "npx cypress run",
     "test": "concurrently \"ng serve\" \"npx cypress run\"",
-    "test2": "set NODE_OPTIONS= npx cypress run"
+    "test2": "cypress open"
   },
   "private": true,
   "dependencies": {

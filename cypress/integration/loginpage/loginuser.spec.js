@@ -6,7 +6,8 @@ describe("Login", () => {
     });
   
     it("should login user", () => {
-      cy.visit("http://localhost:4200/login");
+      cy.visit("https://i346784.hera.fhict.nl/");
+      cy.get('[routerlink="/login"]').click();
       cy.get('#namelogin').type(Cypress.config('username'));
       cy.get('#passlogin').type(Cypress.config('password'));
       cy.get('app-login > .form > [type="submit"]').click();

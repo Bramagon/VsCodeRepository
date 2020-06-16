@@ -16,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  userUrl: string = 'https://localhost:5001/api/Users';
+  userUrl: string = 'https://i346784.venus.fhict.nl/api/Users';
   constructor(private http: HttpClient) { }
 
   getUser(): Observable<User> {

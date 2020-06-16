@@ -1,6 +1,7 @@
 describe("tetris test", () => {
     it("should visit tetris page", () => {
-        cy.visit("http://localhost:4200/Tetris");
+        cy.visit("https://i346784.hera.fhict.nl/");
+        cy.get('[routerlink="/Tetris"]').click();
         
 
     });
