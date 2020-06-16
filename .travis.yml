@@ -8,4 +8,5 @@ apt:
 install:
  - npm install
 script:
- - npm run test
+ - ng serve &
+ - npm run cypress
