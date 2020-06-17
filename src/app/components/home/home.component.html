@@ -9,7 +9,7 @@
 
 <div *ngIf="!notLoggedIn()">
   <div *ngIf="user$ | async as user">
-    <h1 class='title'>Welcome to AngularGame: {{user.name}}!</h1>
+    <h1 id="username" class='title'>Welcome to AngularGame: {{user.name}}!</h1>
     <br>
       <div class='paragraph' *ngIf="score$ | async as score">
         <h2>Your best score:</h2>
