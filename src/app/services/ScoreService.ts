@@ -5,10 +5,11 @@ import { User } from '../Models/User';
 import { Observable, of } from 'rxjs';
 import { shareReplay, map, share } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { HighScore } from '../Models/HighScore';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   })
 };
 
@@ -31,9 +32,9 @@ export class ScoreService {
       .pipe(share(), map(res => res));
   }
 
-  getTopScoreOverall(): Observable<Scoreboard> {
-    const url = `${this.scoreUrl}/GetTopScores`;
-    return this.http.get<Scoreboard>(url, httpOptions)
+  getTopScoreOverall(): Observable<HighScore> {
+    const url = `${this.scoreUrl}/GetHighScores`;
+    return this.http.get<HighScore>(url, httpOptions)
       .pipe(share(), map(res => res));
   }
 

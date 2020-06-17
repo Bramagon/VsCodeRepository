@@ -2,7 +2,7 @@ import { ROWS } from './../constants';
 import { Piece, IPiece } from '../../app/Models/Piece';
 import { COLS } from '../constants';
 import { GridComponent } from '../components/game-parts/grid/grid.component';
-
+import { Points } from '../../app/Models/Points';
 
 export class TetrisService {
 
@@ -14,6 +14,24 @@ isEmpty(val: number) {
 
 insideWalls(x: number) {
   if (x < COLS && x >= 0) { return true; } else { return false; }
+}
+
+getLineScore(lines: number): number {
+  switch (lines) {
+    case 1:
+      return Points.SINGLE;
+      break;
+    case 2:
+      return Points.DOUBLE;
+      break;
+    case 3:
+      return Points.TRIPLE;
+      break;
+    case 4:
+      return Points.TETRIS;
+      break;
+    }
+  return 0; 
 }
 
 aboveFloor(y: number) {

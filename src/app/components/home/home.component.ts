@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/UserService';
 import { Component, OnInit, Input } from '@angular/core';
 import { ScoreService } from 'src/app/services/ScoreService';
 import { Observable } from 'rxjs';
+import { HighScore } from 'src/app/Models/HighScore';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
   user$: Observable<User>;
   score$: Observable<Scoreboard>;
-  highScore$: Observable<Scoreboard>;
+  highScore$: Observable<HighScore>;
 
   constructor(private userService: UserService, private scoreService: ScoreService) { }
 

@@ -151,13 +151,20 @@ export class GridComponent implements OnInit {
   }
 
   clearlines() {
+    var count = 0;
   this.grid.forEach((row, y) => {
       if (row.every(value => value > 0)) {
         this.grid.splice(y, 1);
         this.grid.unshift(Array(COLS).fill(0));
         this.score.linesCount += 1;
+        if (count < 4){
+          count++;
+        }
       }
     });
+    if (count > 0) {
+      this.score.pointsCount = this.score.pointsCount + this.service.getLineScore(count);
+    }
   }
 
   resetGame() {

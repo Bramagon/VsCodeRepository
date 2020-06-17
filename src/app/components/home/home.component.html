@@ -21,6 +21,7 @@
     <br>
       <div class='paragraph' *ngIf="highScore$ | async as highScore">
       <h2>Best score ever:</h2>
+      <p>Player: {{ highScore.name }}</p>
       <p>Score: {{ highScore.pointsCount.toString() }}</p>
       <p>Lines: {{ highScore.linesCount.toString() }}</p>
       <p>Level: {{ highScore.levelCount.toString() }}</p>

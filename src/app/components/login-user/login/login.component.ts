@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
   
   onSubmit() {
-    if (this.nameForm.value.name != null && this.passwordForm.value.password != null) {
+  if (this.nameForm.value.name != null && this.passwordForm.value.password != null) {
     const user = {
       name: this.nameForm.value.name,
       password: this.passwordForm.value.password
