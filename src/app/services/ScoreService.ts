@@ -34,7 +34,7 @@ export class ScoreService {
   }
 
   getTopScoreOverall(): Observable<HighScore> {
-    const url = `${this.scoreUrl}/HighScores`;
+    const url = `${this.scoreUrl}/GetHighScores`;
     return this.http.get<HighScore>(url, httpOptions)
       .pipe(share(), map(res => res));
   }

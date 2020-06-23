@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
   notLoggedIn() {
-    if (localStorage.getItem('token') === null) {
+    if (localStorage.getItem('token') == null) {
       return true;
     } else { return false; }
   }
