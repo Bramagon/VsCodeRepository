@@ -34,15 +34,18 @@ export class ScoreService {
   }
 
   getTopScoreOverall(): Observable<HighScore> {
-    const url = `${this.scoreUrl}/GetHighScores`;
+    const url = `${this.scoreUrl}/HighScores`;
     return this.http.get<HighScore>(url, httpOptions)
       .pipe(share(), map(res => res));
   }
 
   addScore(score: Scoreboard) {
-    const url = `${this.scoreUrl}/PostTetrisScores`;
-    return this.http.post<Scoreboard>(url, score, httpOptions).pipe(share(), map(res => res)).subscribe(function() { window.location.reload(); })
-    
+    const url = `${this.scoreUrl}`;
+    return this.http.post<Scoreboard>(url, score, httpOptions)
+      .pipe(share(), map(res => res))
+      .subscribe(function() { 
+        window.location.reload(); 
+      })
   }
 
 }

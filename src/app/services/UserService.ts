@@ -20,7 +20,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUser(): Observable<User> {
-    const url = `${this.userUrl}/GetUser`;
+    const url = `${this.userUrl}`;
     return this.http.get<User>(url, httpOptions).pipe(share(), map(res => res));
   }
 
@@ -30,12 +30,12 @@ export class UserService {
   }
 
   addUser(user: User): Observable<User> {
-    const url = `${this.userUrl}/PostUser`;
+    const url = `${this.userUrl}`;
     return this.setToken(this.http.post<User>(url, user, httpOptions).pipe(share(), map(res => res)));
   }
 
   loginUser(user: User): Observable<User> {
-    const url = `${this.userUrl}/Login`;
+    const url = `${this.userUrl}/login`;
     return this.setToken(this.http.post<User>(url, user, httpOptions).pipe(share(), map(res => res)));
   }
 

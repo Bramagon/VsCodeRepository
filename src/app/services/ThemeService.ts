@@ -20,8 +20,6 @@ export class ThemeService {
     private styleManager: StyleManagerService
   ) {}
 
-  
-
   getThemeOptions(): Observable<Array<Option>> {
     return this.http.get<Array<Option>>("../assets/options.json");
   }

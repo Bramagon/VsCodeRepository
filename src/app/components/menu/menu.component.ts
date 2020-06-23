@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit{
         this.themeService.updatePreferences(newpref).subscribe();
       } else {
         newpref.theme = themeToSet;
-        this.themeService.savePreferences(newpref).subscribe();
+        this.themeService.savePreferences(newpref).subscribe(p => this.preference = p);
       }
     }
   }
