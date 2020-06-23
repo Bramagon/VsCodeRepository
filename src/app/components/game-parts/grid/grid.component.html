@@ -9,6 +9,6 @@
     </div>
     <button class="btn" (click)="play()">PLAY</button>
     <div class="divider"></div>
-    <button class="btn" *ngIf="!alive && score.pointsCount !== 0" (click)="saveScore()">SAVE</button>
+    <button class="btn" *ngIf="!alive && score.pointsCount !== 0 && user != null" (click)="saveScore()">SAVE</button>
   </div>
 </div>

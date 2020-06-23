@@ -10,18 +10,22 @@ import { User } from '../../Models/User';
 })
 export class UserComponent implements OnInit {
   constructor(private userService: UserService, private useritem: UserItemComponent) { }
+  loginMessage: string;
+  registerMessage: string;
   @Output() getUser: EventEmitter<any> = new EventEmitter();
-  user: User;
   ngOnInit(): void {}
 
 
   addUser(user: User) {
-    this.userService.addUser(user).subscribe(u => this.useritem.refreshComponent(u));
-    this.getUser.emit(user);
+    this.userService.addUser(user).subscribe((response) => 
+      this.useritem.refreshComponent(response));
   }
 
   loginUser(user: User) {
-    this.userService.loginUser(user).subscribe(u => this.useritem.refreshComponent(u));
-    this.getUser.emit(user);
+    this.userService.loginUser(user).subscribe((response) => {
+      this.useritem.refreshComponent(response) 
+    }, (error) => {
+      this.loginMessage = "Invalid credentials";
+    });
   }
 }

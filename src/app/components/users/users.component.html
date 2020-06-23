@@ -1,8 +1,14 @@
 <br>
 <p class="title">Here you can login to an account or create a new one.<br>
   Scores earned during gameplay are tied to your account.</p><br>
+  <div class="aligner">
+    <p class="invalid">{{loginMessage}}</p>
+  </div>
 <app-login (loginUser)="loginUser($event)"></app-login><br>
 
+<div class="aligner">
+  <p class="invalid">{{registerMessage}}</p>
+</div>
 <app-add-user (addUser)="addUser($event)"></app-add-user>
 
 

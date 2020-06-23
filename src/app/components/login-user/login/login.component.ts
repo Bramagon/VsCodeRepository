@@ -1,5 +1,5 @@
 import { Router, RouterModule } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { User } from 'src/app/Models/User';
 import { UserService } from 'src/app/services/UserService';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -40,7 +40,11 @@ export class LoginComponent implements OnInit {
   } 
   else {
   }
-    this.msg = 'Invalid credentials';
+    //this.msg = 'Invalid credentials';
+  }
+
+  addMessage(message: string){
+    this.msg = message;
   }
 
   showPass() {

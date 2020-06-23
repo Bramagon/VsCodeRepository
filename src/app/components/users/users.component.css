@@ -18,3 +18,13 @@
 .paragraph{
   text-align: center;
 }
+
+.invalid{
+  color: red;
+}
+
+.aligner{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}

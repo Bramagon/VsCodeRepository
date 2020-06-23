@@ -4,3 +4,5 @@
       <button (click)="onLogout(user)" class="del">Logout</button>
     </div>
 </div>
+
+<div *ngIf="loginMessage">{{loginMessage}}</div>
