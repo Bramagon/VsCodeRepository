@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Option, Preferences } from "../Models/preferences";
 import { StyleManagerService } from './StyleManager';
 import { share, map } from 'rxjs/operators';
+import { apiUrl } from 'src/config/config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,7 +14,7 @@ const httpOptions = {
 
 @Injectable()
 export class ThemeService {
-  prefUrl: string = 'https://i346784core.venus.fhict.nl/api/Prefs';
+  prefUrl: string = `${apiUrl}/Prefs`;
   constructor(
     private http: HttpClient,
     private styleManager: StyleManagerService

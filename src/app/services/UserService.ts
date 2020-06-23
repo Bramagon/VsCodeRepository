@@ -4,7 +4,7 @@ import { User } from '../Models/User';
 import { Observable, of } from 'rxjs';
 import { shareReplay, map, share } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
+import { apiUrl } from '../../config/config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  userUrl: string = 'https://i346784core.venus.fhict.nl/api/Users';
+  userUrl: string = `${apiUrl}/Users`;
   constructor(private http: HttpClient) { }
 
   getUser(): Observable<User> {

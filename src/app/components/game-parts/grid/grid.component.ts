@@ -108,6 +108,7 @@ export class GridComponent implements OnInit {
 
   saveScore() {
     this.scoreService.addScore(this.score);
+    
   }
 
   freeze() {
